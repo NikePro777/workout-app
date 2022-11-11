@@ -1,11 +1,10 @@
-// @desc Get user profile (получает юзер профайл)
-// @route Get /api/users/profile (получает по этому адресу)
-// @accets Private (это все для авторизованных пользователей)
+import asyncHandler from "express-async-handler";
+import User from "../../models/userModel.js";
+// @desc Get user profile
+// @route Get /api/users/profile
+// @accets Private
 
-export const getUserProfile = (req, res) => {
-  const user = {
-    name: "Jeka",
-    age: 29,
-  };
+export const getUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
   res.json(user);
-};
+});
