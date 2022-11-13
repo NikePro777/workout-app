@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
-import Exercise from "../../models/userModel.js";
+import Exercise from "../../models/exerciseModel.js";
 // @desc Add new execise
-// @route POST /api/exercise
+// @route POST /api/exercises
 // @accets Private
 
 export const addNewExercise = asyncHandler(async (req, res) => {

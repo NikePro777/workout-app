@@ -8,6 +8,7 @@ import { connectDB } from "./config/db.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 // Routes
 import userRoutes from "./routes/userRoutes.js";
+import exerciseRoutes from "./routes/exerciseRoutes.js";
 
 dotenv.config(); // чтобы эта хрень заработала
 
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV === "development") app.use(morgan("dev")); // если 
 
 app.use(express.json()); // это чтобы ответ в формате JSON нам пришел
 app.use("/api/users", userRoutes);
+app.use("/api/exercises", exerciseRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
