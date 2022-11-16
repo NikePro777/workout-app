@@ -20,7 +20,7 @@ export const addNewWorkout = asyncHandler(async (req, res) => {
 export const getWorkout = asyncHandler(async (req, res) => {
   const workout = await Workout.findById(req.params.id)
     .populate("exercises")
-    .lean(); // populate - содержание обьекта раскроется (олбьекта exercises  в нашем случае)
+    .lean(); // populate - содержание обьекта раскроется (объекта exercises  в нашем случае)
   const minutes = Math.ceil(workout.exercises.length);
   res.json({ ...workout, minutes });
 });
