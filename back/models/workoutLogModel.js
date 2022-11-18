@@ -9,7 +9,7 @@ const workoutLogSchema = mongoose.Schema(
       required: true,
     },
     workout: { type: ObjectId, ref: "Workout", required: true },
-    completed: { type: Boolean, default: false },
+    completed: { type: Boolean, default: true },
   },
   {
     minimize: false, // чтобы невведенные данные у пользователя возвращать, даже если они пустые обьекты
