@@ -22,3 +22,21 @@ export const updateExerciseLog = asyncHandler(async (req, res) => {
   const updatedLog = await currentLog.save();
   res.json(updatedLog);
 });
+
+// @desc Update status of complete exercise log
+// @route PUT /api/exercises/log/complete
+// @accets Private
+
+export const updateCompleteExerciseLog = asyncHandler(async (req, res) => {
+  const { logId, completed } = req.body;
+  const currentLog = await ExerciseLog.findById(logId);
+  if (!currentLog) {
+    res.status(404);
+    throw new Error("Данный лог не найден!");
+  }
+
+  currentLog.completed = completed;
+
+  const updatedLog = await currentLog.save();
+  res.json(updatedLog);
+});
