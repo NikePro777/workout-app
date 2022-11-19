@@ -24,3 +24,22 @@ export const getWorkout = asyncHandler(async (req, res) => {
   const minutes = Math.ceil(workout.exercises.length * 3.7);
   res.json({ ...workout, minutes });
 });
+
+// @desc Update workout
+// @route PUT /api/workouts
+// @accets Private
+
+export const updateWorkout = asyncHandler(async (req, res) => {
+  const { name, exerciseIds, workoutId } = req.body;
+  const workout = await Workout.findById(workoutId);
+  if (!workout) {
+    res.status(404);
+    throw new Error("Данная тренировка не найдена!");
+  }
+
+  workout.exercises = exerciseIds;
+  workout.name = name;
+
+  const updatedWorkout = await workout.save();
+  res.json(updatedWorkout);
+});
