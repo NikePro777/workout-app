@@ -33,3 +33,19 @@ export const updateExercise = asyncHandler(async (req, res) => {
   const updatedExercise = await exercise.save();
   res.json(updatedExercise);
 });
+
+// @desc delete exercise
+// @route DELETE /api/exercises
+// @accets Private
+
+export const deleteExercise = asyncHandler(async (req, res) => {
+  const { exerciseId } = req.body;
+  const exercise = await Exercise.findById(exerciseId);
+  if (!exercise) {
+    res.status(404);
+    throw new Error("Данное упражнение не найдено!");
+  }
+
+  await exercise.remove();
+  res.json({ message: "Упражнение удалено" });
+});

@@ -7,13 +7,18 @@ import { createNewExerciseLog } from "../controllers/exercise/log/createControll
 import { getExerciseLog } from "../controllers/exercise/log/getController.js";
 import {
   createNewExercise,
+  deleteExercise,
   updateExercise,
 } from "../controllers/exercise/mainController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.route("/").post(protect, createNewExercise).put(protect, updateExercise); // протект означает что только авторизованные пользователи могут переходить сюда
+router
+  .route("/")
+  .post(protect, createNewExercise)
+  .put(protect, updateExercise)
+  .delete(protect, deleteExercise); // протект означает что только авторизованные пользователи могут переходить сюда
 
 router
   .route("/log")
