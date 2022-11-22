@@ -49,3 +49,12 @@ export const deleteExercise = asyncHandler(async (req, res) => {
   await exercise.remove();
   res.json({ message: "Упражнение удалено" });
 });
+
+// @desc get exercises
+// @route GET /api/exercises
+// @accets Private
+
+export const getExercises = asyncHandler(async (req, res) => {
+  const exercises = await Exercise.find({});
+  res.json(exercises);
+});

@@ -8,6 +8,7 @@ import { getExerciseLog } from "../controllers/exercise/log/getController.js";
 import {
   createNewExercise,
   deleteExercise,
+  getExercises,
   updateExercise,
 } from "../controllers/exercise/mainController.js";
 import { protect } from "../middleware/authMiddleware.js";
@@ -17,6 +18,7 @@ const router = express.Router();
 router
   .route("/")
   .post(protect, createNewExercise)
+  .get(protect, getExercises)
   .put(protect, updateExercise)
   .delete(protect, deleteExercise); // протект означает что только авторизованные пользователи могут переходить сюда
 
