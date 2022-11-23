@@ -7,7 +7,7 @@ import ExerciseLog from "../../../models/exerciseLogModel.js";
 
 export const getExerciseLog = asyncHandler(async (req, res) => {
   const exerciseLog = await ExerciseLog.findById(req.params.id)
-    .populate("exercise", "name imageId")
+    .populate("exercise", "name imageName")
     .lean(); // lean - преобразует в обьект (возвращает обьект)
 
   if (!exerciseLog) {
@@ -17,7 +17,7 @@ export const getExerciseLog = asyncHandler(async (req, res) => {
   const prevExerciseLogs = await ExerciseLog.find({
     user: req.user._id,
     exercise: exerciseLog._id,
-  }).sort("desc");
+  }).sort({ createdAt: "desc" });
 
   const prevExLog = prevExerciseLogs[0];
 

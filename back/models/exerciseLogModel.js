@@ -17,6 +17,7 @@ const exerciseLogSchema = mongoose.Schema(
         completed: { type: Boolean, default: false },
       },
     ],
+    workoutLog: { type: ObjectId, ref: "WorkoutLog", required: true },
   },
   {
     minimize: false, // чтобы невведенные данные у пользователя возвращать, даже если они пустые обьекты
