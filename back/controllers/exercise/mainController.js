@@ -5,11 +5,11 @@ import Exercise from "../../models/exerciseModel.js";
 // @accets Private
 
 export const createNewExercise = asyncHandler(async (req, res) => {
-  const { name, times, imageIndex } = req.body;
+  const { name, times, imageName } = req.body;
   const exercise = await Exercise.create({
     name,
     times,
-    imageIdx: imageIndex,
+    imageName,
   });
   res.json(exercise);
 });
@@ -19,7 +19,7 @@ export const createNewExercise = asyncHandler(async (req, res) => {
 // @accets Private
 
 export const updateExercise = asyncHandler(async (req, res) => {
-  const { name, times, imageIndex, exerciseId } = req.body;
+  const { name, times, imageName, exerciseId } = req.body;
   const exercise = await Exercise.findById(exerciseId);
   if (!exercise) {
     res.status(404);
@@ -27,7 +27,7 @@ export const updateExercise = asyncHandler(async (req, res) => {
   }
 
   exercise.times = times;
-  exercise.imageIdx = imageIndex;
+  exercise.imageName = imageName;
   exercise.name = name;
 
   const updatedExercise = await exercise.save();

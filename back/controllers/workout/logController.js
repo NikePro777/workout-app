@@ -44,3 +44,37 @@ export const createNewWorkoutLog = asyncHandler(async (req, res) => {
     throw new Error("Workout not found");
   }
 });
+
+// @desc GET workout Log
+// @route GET /api/workouts/log/:id
+// @accets Private
+
+export const getWorkoutLog = asyncHandler(async (req, res) => {
+  const workoutLog = await WorkoutLog.findById(req.params.id)
+    .populate("workout")
+    .populate({
+      path: "exerciseLogs",
+      populate: {
+        path: "exercise",
+      },
+    })
+    .lean();
+  const minutes = Math.ceil(workoutLog.workout.exercises.length * 3.7);
+  res.json({ ...workoutLog, minutes });
+});
+
+// @desc GET workout Log completed
+// @route GET /api/workouts/log/completed
+// @accets Private
+
+export const updateCompleteWorkoutLog = asyncHandler(async (req, res) => {
+  const { logId } = req.body;
+  const currentLog = await WorkoutLog.findById(logId);
+  if (!currentLog) {
+    res.status(404);
+    throw new Error("Данный лог не найден");
+  }
+  currentLog.completed = true;
+  const updatedLog = await currentLog.save();
+  res.json(updatedLog);
+});
