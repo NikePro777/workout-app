@@ -1,9 +1,11 @@
-import Header from "../../common/Header/Header";
+import Button from "../../ui/Button/button";
 
 const Home = () => {
   return (
     <>
-      <div>Home Page</div>
+      <div>
+        <Button text="New" style="main" callback={() => {}} />
+      </div>
     </>
   );
 };

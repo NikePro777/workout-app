@@ -11,9 +11,6 @@ const Header = () => {
       <button type="button">
         <img src={hamburgerImage} alt="Auth" />
       </button>
-      <button type="button">
-        <h1>кнопка</h1>
-      </button>
     </header>
   );
 };
