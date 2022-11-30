@@ -1,13 +1,9 @@
 import React from "react";
-import Layout from "./components/common/Layout.jsx";
+// import Layout from "./components/common/Layout.jsx";
 import Home from "./components/pages/Home/Home";
 
 const App = () => {
-  return (
-    <Layout>
-      <Home />
-    </Layout>
-  );
+  return <Home />;
 };
 
 export default App;

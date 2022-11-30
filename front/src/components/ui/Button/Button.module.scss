@@ -1,7 +1,7 @@
 @import "../../../scss/variables";
 
 $accent-04: rgba($accent, 0.4);
-button {
+.button {
   border: none;
   outline: none;
   font-size: 18px;
@@ -15,9 +15,7 @@ button {
     background-color: rgba($accent, 0.7);
   }
   &.main {
-    font-size: 24px;
-    background-color: rgba($color: #000, $alpha: 0.2);
-    padding: 19px 49px;
+    background-color: rgba($color: #000, $alpha: 0.3);
     &:hover {
       background-color: $accent-04;
     }
