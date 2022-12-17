@@ -14,7 +14,7 @@ const NewWorkout = () => {
 
   return (
     <>
-      <Layout bgImage={bgImage}></Layout>
+      <Layout bgImage={bgImage} heading={"Create new workout"} />
       <div className={styles.wrapper}>
         <form onSubmit={handleSubmit}>
           <Field
