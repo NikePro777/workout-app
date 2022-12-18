@@ -4,9 +4,11 @@ import bgImage from "../../../images/new-workout-bg.jpg";
 import Field from "../../ui/Field/Field";
 import { useState } from "react";
 import Button from "../../ui/Button/Button";
+import ReactSelect from "react-select";
 
 const NewWorkout = () => {
   const [name, setName] = useState("");
+  const [exercises, setExercises] = useState();
 
   const handleSubmit = () => {
     console.log("submit");
@@ -21,6 +23,18 @@ const NewWorkout = () => {
             placeholder="Введите имя"
             value={name}
             onChange={(e) => setName(e.target.value)}
+          />
+          <ReactSelect
+            classNamePrefix="select2-selection"
+            placeholder="Exercises..."
+            title="Exercises"
+            options={[
+              { value: "dfsdfd", label: "Push-ups" },
+              { value: "sdfdsf", label: "Pull-ups" },
+            ]}
+            value={exercises}
+            onChange={setExercises}
+            isMulti={true}
           />
           <Button text="Create" callback={() => {}} />
         </form>
