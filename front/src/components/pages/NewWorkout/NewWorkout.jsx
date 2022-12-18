@@ -5,6 +5,7 @@ import Field from "../../ui/Field/Field";
 import { useState } from "react";
 import Button from "../../ui/Button/Button";
 import ReactSelect from "react-select";
+import { Link } from "react-router-dom";
 
 const NewWorkout = () => {
   const [name, setName] = useState("");
@@ -24,6 +25,7 @@ const NewWorkout = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+          <Link to="/new-exercise" className="dark-link">Add new exercise</Link>
           <ReactSelect
             classNamePrefix="select2-selection"
             placeholder="Exercises..."
