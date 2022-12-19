@@ -8,12 +8,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import NewWorkout from "./components/pages/NewWorkout/NewWorkout";
+import Auth from "./components/pages/Auth/Auth";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="">
       <Route index element={<Home />} />
       <Route path="/new-workout" element={<NewWorkout />} />
+      <Route path="/auth" element={<Auth />} />
     </Route>
   )
 );

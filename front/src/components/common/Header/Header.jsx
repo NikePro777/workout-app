@@ -4,7 +4,7 @@ import styles from "./Header.module.scss";
 
 import userImage from "../../../images/header/user.svg";
 import arrowImage from "../../../images/header/arrow.svg";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { location } = useLocation();
@@ -21,7 +21,10 @@ const Header = () => {
           <img src={arrowImage} alt="Back" />
         </button>
       ) : (
-        <button type="button">
+        <button
+          type="button"
+          onClick={() => navigate("/auth", { replace: false })}
+        >
           <img src={userImage} alt="Auth" />
         </button>
       )}

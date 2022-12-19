@@ -1,4 +1,5 @@
 import Layout from "../../common/Layout";
+import styles from "./Auth.module.scss";
 import bgImage from "../../../images/new-workout-bg.jpg";
 import Field from "../../ui/Field/Field";
 import { useState } from "react";
@@ -6,7 +7,7 @@ import Button from "../../ui/Button/Button";
 import ReactSelect from "react-select";
 import { Link } from "react-router-dom";
 
-const NewWorkout = () => {
+const Auth = () => {
   const [name, setName] = useState("");
   const [exercises, setExercises] = useState();
 
@@ -17,14 +18,16 @@ const NewWorkout = () => {
   return (
     <>
       <Layout bgImage={bgImage} heading={"Create new workout"} />
-      <div className='wrapperInnerPage'>
+      <div className="wrapperInnerPage">
         <form onSubmit={handleSubmit}>
           <Field
             placeholder="Введите имя"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <Link to="/new-exercise" className="dark-link">Add new exercise</Link>
+          <Link to="/new-exercise" className="dark-link">
+            Add new exercise
+          </Link>
           <ReactSelect
             classNamePrefix="select2-selection"
             placeholder="Exercises..."
@@ -44,4 +47,4 @@ const NewWorkout = () => {
   );
 };
 
-export default NewWorkout;
+export default Auth;
