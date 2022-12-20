@@ -7,7 +7,7 @@ import arrowImage from "../../../images/header/arrow.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const { location } = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
   return (
     <header className={styles.header}>

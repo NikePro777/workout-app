@@ -4,43 +4,40 @@ import bgImage from "../../../images/new-workout-bg.jpg";
 import Field from "../../ui/Field/Field";
 import { useState } from "react";
 import Button from "../../ui/Button/Button";
-import ReactSelect from "react-select";
-import { Link } from "react-router-dom";
 
 const Auth = () => {
-  const [name, setName] = useState("");
-  const [exercises, setExercises] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {
-    console.log("submit");
+  const handleAuth = () => {
+    console.log("auth");
+  };
+  const handleReg = () => {
+    console.log("reg");
   };
 
   return (
     <>
-      <Layout bgImage={bgImage} heading={"Create new workout"} />
+      <Layout bgImage={bgImage} heading={"Auth and Registration"} />
       <div className="wrapperInnerPage">
-        <form onSubmit={handleSubmit}>
+        <form>
           <Field
-            placeholder="Введите имя"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            type="email"
+            placeholder="Введите почту"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
-          <Link to="/new-exercise" className="dark-link">
-            Add new exercise
-          </Link>
-          <ReactSelect
-            classNamePrefix="select2-selection"
-            placeholder="Exercises..."
-            title="Exercises"
-            options={[
-              { value: "dfsdfd", label: "Push-ups" },
-              { value: "sdfdsf", label: "Pull-ups" },
-            ]}
-            value={exercises}
-            onChange={setExercises}
-            isMulti={true}
+          <Field
+            type="password"
+            placeholder="Введите пароль"
+            value={password}
+            onChange={({ target: { value } }) => setPassword(value)}
           />
-          <Button text="Create" callback={() => {}} />
+          <div className={styles.wrapperButtons}>
+            <Button text="Sign in" callback={handleAuth} />
+            <Button text="Sign up" callback={handleReg} />
+          </div>
         </form>
       </div>
     </>
