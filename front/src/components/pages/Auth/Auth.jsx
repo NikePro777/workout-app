@@ -1,32 +1,37 @@
 import Layout from "../../common/Layout";
 import styles from "./Auth.module.scss";
-import bgImage from "../../../images/new-workout-bg.jpg";
+import bgImage from "../../../images/auth-bg.png";
 import Field from "../../ui/Field/Field";
 import { useState } from "react";
 import Button from "../../ui/Button/Button";
+import Alert from "../../ui/Alert/alert";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [type, setType] = useState("auth");
 
-  const handleAuth = () => {
-    console.log("auth");
-  };
-  const handleReg = () => {
-    console.log("reg");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (type === "auth") {
+      console.log("auth");
+    } else {
+      console.log("reg");
+    }
   };
 
   return (
     <>
       <Layout bgImage={bgImage} heading={"Auth and Registration"} />
       <div className="wrapperInnerPage">
-        <form>
+        {true && <Alert type="warning" text="вроде что то сделали" />}
+        <form onSubmit={handleSubmit}>
           <Field
             type="email"
             placeholder="Введите почту"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
             required
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Field
             type="password"
@@ -35,8 +40,8 @@ const Auth = () => {
             onChange={({ target: { value } }) => setPassword(value)}
           />
           <div className={styles.wrapperButtons}>
-            <Button text="Sign in" callback={handleAuth} />
-            <Button text="Sign up" callback={handleReg} />
+            <Button text="Sign in" callback={() => setType("auth")} />
+            <Button text="Sign up" callback={() => setType("reg")} />
           </div>
         </form>
       </div>

@@ -1,1 +1,21 @@
-
+@import "../../../scss/variables";
+.wrapperButtons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  > div {
+    width: 48%;
+    &:last-child > button {
+      background-color: #20366b;
+      opacity: 0.8;
+      transition: opacity 0.15s ease;
+      &:hover {
+        background-color: #29478c;
+        opacity: 1;
+      }
+    }
+    > button {
+      width: 100%;
+    }
+  }
+}
