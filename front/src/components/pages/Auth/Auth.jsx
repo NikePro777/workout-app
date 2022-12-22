@@ -5,11 +5,22 @@ import Field from "../../ui/Field/Field";
 import { useState } from "react";
 import Button from "../../ui/Button/Button";
 import Alert from "../../ui/Alert/alert";
+import { useMutation } from "react-query";
+import { $api } from "../../../api/api";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState("auth");
+
+  const { mutate, isLoading } = useMutation("Registration", () =>
+    $api({
+      url: "/users",
+      type: "POST",
+      body: { email, password },
+      auth: false,
+    })
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
