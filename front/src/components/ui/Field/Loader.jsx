@@ -1,5 +1,5 @@
 import React from "react";
-import img from "../../../images/auth-bg.png";
+import img from "../../../images/three-dots.png";
 
 const Loader = () => {
   return <img src={img} alt="loader" />;

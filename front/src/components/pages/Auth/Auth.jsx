@@ -7,6 +7,7 @@ import Button from "../../ui/Button/Button";
 import Alert from "../../ui/Alert/alert";
 import { useMutation } from "react-query";
 import { $api } from "../../../api/api";
+import Loader from "../../ui/Field/Loader";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -36,6 +37,7 @@ const Auth = () => {
       <Layout bgImage={bgImage} heading={"Auth and Registration"} />
       <div className="wrapperInnerPage">
         {true && <Alert type="warning" text="вроде что то сделали" />}
+        {true && <Loader />}
         <form onSubmit={handleSubmit}>
           <Field
             type="email"
