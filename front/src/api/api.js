@@ -17,18 +17,22 @@ export const $api = async ({ url, type = "GET", auth = false, body }) => {
     switch (type) {
       case "GET":
         data = await instanse.get(url);
+        break;
 
       case "POST":
         data = await instanse.post(url, body);
-
+        break;
       case "PUT":
         data = await instanse.put(url, body);
-
+        break;
       case "DELETE":
         data = await instanse.delete(url);
+        break;
     }
     return data.data;
   } catch (error) {
-    throw error.message;
+    throw error.response && error.response.data
+      ? error.response.data.message
+      : error.message;
   }
 };

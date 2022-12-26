@@ -1,10 +1,14 @@
 @import "../../../scss/variables";
+
 .wrapperButtons {
   display: flex;
   align-items: center;
   justify-content: space-between;
   > div {
     width: 48%;
+    > button {
+      width: 100%;
+    }
     &:last-child > button {
       background-color: #20366b;
       opacity: 0.8;
@@ -13,9 +17,6 @@
         background-color: #29478c;
         opacity: 1;
       }
-    }
-    > button {
-      width: 100%;
     }
   }
 }
