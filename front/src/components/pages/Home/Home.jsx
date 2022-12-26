@@ -1,5 +1,5 @@
 import Layout from "../../common/Layout";
-import Button from "../../ui/Button/Button";
+import Button from "../../ui/Button/button";
 import Counters from "../../ui/Counters/Counters";
 import bgImage from "../../../images/home-bg.jpg";
 import styles from "./Home.module.scss";

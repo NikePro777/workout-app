@@ -12,25 +12,22 @@ export const $api = async ({ url, type = "GET", auth = false, body }) => {
     const token = localStorage.getItem("token");
     instanse.defaults.headers.common["Authorization"] = token;
   }
-
+  let data;
   try {
     switch (type) {
       case "GET":
-        const { data } = await instanse.get(url);
-        return data;
+        data = await instanse.get(url);
 
       case "POST":
-        const { data } = await instanse.post(url, body);
-        return data;
+        data = await instanse.post(url, body);
 
       case "PUT":
-        const { data } = await instanse.put(url, body);
-        return data;
+        data = await instanse.put(url, body);
 
       case "DELETE":
-        const { data } = await instanse.delete(url);
-        return data;
+        data = await instanse.delete(url);
     }
+    return data.data;
   } catch (error) {
     throw error.message;
   }

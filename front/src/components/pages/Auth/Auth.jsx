@@ -3,7 +3,7 @@ import styles from "./Auth.module.scss";
 import bgImage from "../../../images/auth-bg.png";
 import Field from "../../ui/Field/Field";
 import { useState } from "react";
-import Button from "../../ui/Button/Button";
+import Button from "../../ui/Button/button";
 import Alert from "../../ui/Alert/alert";
 import { useMutation } from "react-query";
 import { $api } from "../../../api/api";
@@ -14,7 +14,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [type, setType] = useState("auth");
 
-  const { mutate, isLoading } = useMutation("Registration", () =>
+  const { mutate, isLoading, error } = useMutation("Registration", () =>
     $api({
       url: "/users",
       type: "POST",
@@ -36,15 +36,15 @@ const Auth = () => {
     <>
       <Layout bgImage={bgImage} heading={"Auth and Registration"} />
       <div className="wrapperInnerPage">
-        {true && <Alert type="warning" text="вроде что то сделали" />}
+        {error && <Alert type="warning" text="вроде что то сделали" />}
         {true && <Loader />}
         <form onSubmit={handleSubmit}>
           <Field
             type="email"
             placeholder="Введите почту"
             value={email}
-            required
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <Field
             type="password"
