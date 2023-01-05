@@ -1,34 +1,39 @@
 import axios from "axios";
 
-const instanse = axios.create({
-  baseURL: "http://localhost:5000/api",
+const instance = axios.create({
+  baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-export const $api = async ({ url, type = "GET", auth = false, body }) => {
+export const $api = async ({ url, type = "GET", auth = true, body }) => {
   if (auth) {
+    console.log("api 12 string");
     const token = localStorage.getItem("token");
-    instanse.defaults.headers.common["Authorization"] = token;
+    instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
   let data;
   try {
     switch (type) {
       case "GET":
-        data = await instanse.get(url);
+      default:
+        data = await instance.get(url);
         break;
 
       case "POST":
-        data = await instanse.post(url, body);
+        data = await instance.post(url, body);
         break;
+
       case "PUT":
-        data = await instanse.put(url, body);
+        data = await instance.put(url, body);
         break;
+
       case "DELETE":
-        data = await instanse.delete(url);
+        data = await instance.delete(url);
         break;
     }
+
     return data.data;
   } catch (error) {
     throw error.response && error.response.data

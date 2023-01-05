@@ -3,7 +3,7 @@ import styles from "./Auth.module.scss";
 import bgImage from "../../../images/auth-bg.png";
 import Field from "../../ui/Field/Field";
 import { useState } from "react";
-import Button from "../../ui/Button/button";
+import Button from "../../ui/Button/Button";
 import Alert from "../../ui/Alert/alert";
 import { useMutation } from "react-query";
 import { $api } from "../../../api/api";
@@ -14,13 +14,24 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [type, setType] = useState("auth");
 
-  const { mutate, isLoading, error } = useMutation("Registration", () =>
-    $api({
-      url: "/users",
-      type: "POST",
-      body: { email, password },
-      auth: false,
-    })
+  const {
+    mutate: register,
+    isLoading,
+    error,
+  } = useMutation(
+    "Registration",
+    () =>
+      $api({
+        url: "/users",
+        type: "POST",
+        body: { email, password },
+        auth: false,
+      }),
+    {
+      onSuccess(data) {
+        localStorage.setItem("token", data.token);
+      },
+    }
   );
 
   const handleSubmit = (e) => {
@@ -28,7 +39,7 @@ const Auth = () => {
     if (type === "auth") {
       console.log("auth");
     } else {
-      console.log("reg");
+      register();
     }
   };
 
@@ -36,8 +47,8 @@ const Auth = () => {
     <>
       <Layout bgImage={bgImage} heading={"Auth and Registration"} />
       <div className="wrapperInnerPage">
-        {error && <Alert type="warning" text="вроде что то сделали" />}
-        {true && <Loader />}
+        {error && <Alert type="warning" text="ошибка какая то" />}
+        {isLoading && <Loader />}
         <form onSubmit={handleSubmit}>
           <Field
             type="email"

@@ -2,7 +2,7 @@ import Layout from "../../common/Layout";
 import bgImage from "../../../images/new-workout-bg.jpg";
 import Field from "../../ui/Field/Field";
 import { useState } from "react";
-import Button from "../../ui/Button/button";
+import Button from "../../ui/Button/Button";
 import ReactSelect from "react-select";
 import { Link } from "react-router-dom";
 
@@ -23,6 +23,7 @@ const NewWorkout = () => {
             placeholder="Введите имя"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
           <Link to="/new-exercise" className="dark-link">
             Add new exercise
