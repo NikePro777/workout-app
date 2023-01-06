@@ -8,11 +8,16 @@ import Alert from "../../ui/Alert/alert";
 import { useMutation } from "react-query";
 import { $api } from "../../../api/api";
 import Loader from "../../ui/Field/Loader";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../hooks/useAuth";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [type, setType] = useState("auth");
+
+  const navigate = useNavigate();
+  const { setIsAuth } = useAuth();
 
   const {
     mutate: register,
@@ -30,6 +35,10 @@ const Auth = () => {
     {
       onSuccess(data) {
         localStorage.setItem("token", data.token);
+        setIsAuth(true);
+        setPassword("");
+        setEmail("");
+        navigate("/");
       },
     }
   );
