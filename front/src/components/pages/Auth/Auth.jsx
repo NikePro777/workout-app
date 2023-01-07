@@ -34,11 +34,27 @@ const Auth = () => {
       }),
     {
       onSuccess(data) {
-        localStorage.setItem("token", data.token);
-        setIsAuth(true);
-        setPassword("");
-        setEmail("");
-        navigate("/");
+        successLogin(data.token);
+      },
+    }
+  );
+
+  const {
+    mutate: auth,
+    isLoading: isLoadingAuth,
+    error: errorAuth,
+  } = useMutation(
+    "Auth",
+    () =>
+      $api({
+        url: "/users/login",
+        type: "POST",
+        body: { email, password },
+        auth: false,
+      }),
+    {
+      onSuccess(data) {
+        successLogin(data.token);
       },
     }
   );
