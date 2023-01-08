@@ -1,14 +1,17 @@
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Layout from "../../common/Layout";
-import styles from "./Auth.module.scss";
+
 import bgImage from "../../../images/auth-bg.png";
 import Field from "../../ui/Field/Field";
-import { useState } from "react";
 import Button from "../../ui/Button/Button";
-import Alert from "../../ui/Alert/alert";
+import Alert from "../../ui/Alert/Alert";
+import Loader from "../../ui/Loader";
+
 import { useMutation } from "react-query";
+
+import styles from "./Auth.module.scss";
 import { $api } from "../../../api/api";
-import Loader from "../../ui/Field/Loader";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
 
 const Auth = () => {
@@ -16,8 +19,18 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [type, setType] = useState("auth");
 
-  const navigate = useNavigate();
+  const history = useHistory();
   const { setIsAuth } = useAuth();
+
+  const successLogin = (token) => {
+    localStorage.setItem("token", token);
+    setIsAuth(true);
+
+    setPassword("");
+    setEmail("");
+
+    history.replace("/");
+  };
 
   const {
     mutate: register,
@@ -61,8 +74,9 @@ const Auth = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (type === "auth") {
-      console.log("auth");
+      auth();
     } else {
       register();
     }
@@ -70,23 +84,25 @@ const Auth = () => {
 
   return (
     <>
-      <Layout bgImage={bgImage} heading={"Auth and Registration"} />
-      <div className="wrapperInnerPage">
-        {error && <Alert type="warning" text="ошибка какая то" />}
-        {isLoading && <Loader />}
+      <Layout bgImage={bgImage} heading="Auth || Register" />
+      <div className="wrapper-inner-page">
+        {error && <Alert type="error" text={error} />}
+        {errorAuth && <Alert type="error" text={errorAuth} />}
+        {(isLoading || isLoadingAuth) && <Loader />}
         <form onSubmit={handleSubmit}>
           <Field
             type="email"
-            placeholder="Введите почту"
+            placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
           <Field
-            type="password"
-            placeholder="Введите пароль"
+            placeholder="Enter password"
             value={password}
             onChange={({ target: { value } }) => setPassword(value)}
+            required
+            type="password"
           />
           <div className={styles.wrapperButtons}>
             <Button text="Sign in" callback={() => setType("auth")} />
