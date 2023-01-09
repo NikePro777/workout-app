@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import Layout from "../../common/Layout";
-
+import { useNavigate } from "react-router";
 import bgImage from "../../../images/auth-bg.png";
 import Field from "../../ui/Field/Field";
 import Button from "../../ui/Button/Button";
-import Alert from "../../ui/Alert/Alert";
-import Loader from "../../ui/Loader";
 
 import { useMutation } from "react-query";
 
@@ -19,7 +16,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [type, setType] = useState("auth");
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const { setIsAuth } = useAuth();
 
   const successLogin = (token) => {
@@ -29,13 +26,13 @@ const Auth = () => {
     setPassword("");
     setEmail("");
 
-    history.replace("/");
+    navigate.replace("/");
   };
 
   const {
     mutate: register,
-    isLoading,
-    error,
+    // isLoading,
+    // error,
   } = useMutation(
     "Registration",
     () =>
@@ -54,8 +51,8 @@ const Auth = () => {
 
   const {
     mutate: auth,
-    isLoading: isLoadingAuth,
-    error: errorAuth,
+    // isLoading: isLoadingAuth,
+    // error: errorAuth,
   } = useMutation(
     "Auth",
     () =>
@@ -86,9 +83,9 @@ const Auth = () => {
     <>
       <Layout bgImage={bgImage} heading="Auth || Register" />
       <div className="wrapper-inner-page">
-        {error && <Alert type="error" text={error} />}
+        {/* {error && <Alert type="error" text={error} />}
         {errorAuth && <Alert type="error" text={errorAuth} />}
-        {(isLoading || isLoadingAuth) && <Loader />}
+        {(isLoading || isLoadingAuth) && <Loader />} */}
         <form onSubmit={handleSubmit}>
           <Field
             type="email"

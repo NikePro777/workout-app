@@ -37,7 +37,7 @@ const Header = () => {
           />
         </button>
       )}
-      <Hamburger />
+      {/* <Hamburger /> */}
     </header>
   );
 };
