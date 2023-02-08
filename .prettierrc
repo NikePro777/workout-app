@@ -4,7 +4,7 @@
 	"useTabs": true, // используем табы
 	"semi": false, // точка с запятой в конце
 	"singleQuote": false, // одинарные ковычки вместо двойных
-	"jsxSingleQuote": true, // ххз
+	"jsxSingleQuote": true, // хз
 	"arrowParens": "avoid", // опускает скобки если в стрелочной функции один аргумент
     "importOrder": [
         "<THIRD_PARTY_MODULES>",
