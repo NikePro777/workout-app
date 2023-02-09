@@ -3,6 +3,8 @@ import dotenv from "dotenv"
 import express from "express"
 import morgan from "morgan"
 
+import { errorHandler, notFound } from "./app/middleware/error.middleware.js"
+
 import authRoutes from "./app/auth/auth.routes.js"
 import { prisma } from "./app/prisma.js"
 
@@ -14,6 +16,12 @@ async function main() {
 	if (process.env.NODE_ENV === "development") app.use(morgan("dev"))
 	// работает благодаря тому что сверху dotenv.config подключили, запустили морган - чтобы логи просматривались
 
+	app.use(express.json()) // чтобы все данные входящие и исходящие были в формате json
+	app.use("/api/auth", authRoutes)
+
+	app.use(notFound)
+	app.use(errorHandler)
+
 	const PORT = process.env.PORT || 5000
 
 	app.listen(
@@ -23,8 +31,6 @@ async function main() {
 				.bold
 		)
 	)
-	app.use(express.json()) // чтобы все данные входящие и исходящие были в формате json
-	app.use("/api/auth", authRoutes)
 }
 
 main()
