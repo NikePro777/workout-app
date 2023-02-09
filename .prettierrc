@@ -1,18 +1,18 @@
 {
-	"trailingComma": "none", // последняя запятая
-	"tabWidth": 2, // ширина таба
-	"useTabs": true, // используем табы
-	"semi": false, // точка с запятой в конце
-	"singleQuote": false, // одинарные ковычки вместо двойных
-	"jsxSingleQuote": true, // хз
-	"arrowParens": "avoid", // опускает скобки если в стрелочной функции один аргумент
+	"trailingComma": "none",
+	"tabWidth": 2,
+	"useTabs": true,
+	"semi": false,
+	"singleQuote": false,
+	"jsxSingleQuote": true,
+	"arrowParens": "avoid",
     "importOrder": [
         "<THIRD_PARTY_MODULES>",
         "/routes/",
         "/middleware/",
         "^../(.*)",
-        "^./(.*)" // очередность импортов, сначала библиотеки, потом роуты и тд
+        "^./(.*)"
     ],
-"importOrderSeparation": true, // пустая строка между группами
+"importOrderSeparation": true,
 "importOrderSortSpecifiers": true
 }
